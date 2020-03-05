@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import time
 
-def dailyScraper():
+def daily_scraper():
     url="https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm"
     page=soup(
         req.get(url).content.decode("utf-8"),"lxml"
@@ -22,7 +22,7 @@ def dailyScraper():
             writer.writerow([x.text.strip() for x in items])
         print("Raw data writter to data/ folder")
 
-def Processor():
+def processor():
     df=pd.read_csv("data/output.csv")
     df=df.dropna(how="all",axis=0)
     colnames=list(df.columns)
@@ -46,5 +46,5 @@ def Processor():
     outdf.to_csv("data/output.csv",index=False)
 
 if __name__ == "__main__":
-    dailyScraper()
-    Processor()
+    daily_scraper()
+    processor()
